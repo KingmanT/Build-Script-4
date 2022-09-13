@@ -22,3 +22,23 @@ sunrise = suninfo.json()['results']['sunrise']
 sunset = suninfo.json()['results']['sunset']
 print(sunrise)
 print(sunset)
+
+# timezone = requests.get('https://timeapi.io/api/TimeZone/coordinate?latitude=38.9&longitude=-77.03')
+timeinfo = requests.get('https://timeapi.io/api/TimeZone/coordinate?latitude=' + str(latitude) + '&longitude=' + str(longitude))
+timezone = timeinfo.json()['timeZone']
+print(timezone)
+
+url = "https://timeapi.io/api/Conversion/ConvertTimeZone"
+payload = json.dumps({
+  "fromTimeZone": "UTC",
+  "dateTime": "2021-03-14 17:45:00",
+  "toTimeZone": f'{timezone}',
+  "dstAmbiguity": ""
+})
+headers = {
+  'Content-Type': 'application/json'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)
