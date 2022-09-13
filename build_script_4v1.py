@@ -5,7 +5,7 @@ import sys
 import requests
 
 latlong = requests.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + (sys.argv[1]) + '&key=')
-# latlong = requests.get('https://maps.googleapis.com/maps/api/geocode/json?address=new york&key=AIzaSyAa1469a_qPfqkSMEjK3OQ8Md7u4Ap10b4')
+# latlong = requests.get('https://maps.googleapis.com/maps/api/geocode/json?address=new york&key=')
 # print(latlong.json())
 latitude = latlong.json()['results'][0]['geometry']['location']['lat']
 longitude = latlong.json()['results'][0]['geometry']['location']['lng']
