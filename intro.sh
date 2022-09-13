@@ -5,9 +5,11 @@
 
 echo "Welcome to the sunrise/sunset calculator"
 echo "------------------------------------------"
-read -p "Please press enter to continue or type 'exit' to quit program " ans1
+echo "Please note that this program requires a Google Maps API key in order to work." 
+echo "Enter your Google Maps API key to continue or type 'exit' to quit program "
 echo "------------------------------------------"
-if [[ $ans1 = "exit" ]]; then
+read key
+if [[ $key = "exit" ]]; then
     echo "Exiting program"
     echo "------------------------------------------"
     exit 0
@@ -25,5 +27,5 @@ echo "Please enter the date that you would like to get information on"
 echo "------------------------------------------"
 read inputdate
 
-python3 build_script_4v1.py "$inputlocation" "$inputdate"
+python3 build_script_4v1.py "$inputlocation" "$inputdate" "$key"
 
