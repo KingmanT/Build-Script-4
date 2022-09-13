@@ -17,7 +17,7 @@ echo "This program will allow you to check the time that"
 echo "the sun will set and rise based on the location you enter"
 echo " "
 echo "------------------------------------------"
-echo "Please enter the time zone or city of that you would like to get information about"
+echo "Please enter the location that you would like to get information about"
 echo "------------------------------------------"
 read inputlocation
 echo "------------------------------------------"
