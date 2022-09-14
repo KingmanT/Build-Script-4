@@ -39,14 +39,23 @@ if sunriseutc.split()[1] == "PM":
     hour = sunriseutc.split()[0]
     # print(hour)
     hh = int(hour.split(':')[0])
-    hh24 = str(hh + 12) 
-    # print(hh24)
+    if hh == 12:
+        hh24 = str(12)
+    else:
+        hh24 = str(hh + 12) 
+        # print(hh24)
     sunrise24 = hh24 + ":" + hour.split(':')[1] + ":" + hour.split(':')[2]
-    print("line 45-", sunrise24)
+    print(sunrise24)
 
 elif sunriseutc.split()[1] == "AM":
-    sunrise24 = sunriseutc.split()[0]
-    print("line 49-", sunrise24)
+    hour = sunriseutc.split()[0]
+    hh = int(hour.split(":")[0])
+    if hh == 12:
+        hh24 = "00"
+        sunrise24 = hh24 + ":" + hour.split(':')[1] + ":" + hour.split(':')[2]
+    else:
+        sunrise24 = sunriseutc.split()[0]
+    print(sunrise24)
 
 url = "https://timeapi.io/api/Conversion/ConvertTimeZone"
 payload = json.dumps({
@@ -67,14 +76,23 @@ if sunsetutc.split()[1] == "PM":
     hour = sunsetutc.split()[0]
     # print(hour)
     hh = int(hour.split(':')[0])
-    hh24 = str(hh + 12) 
-    # print(hh24)
+    if hh == 12:
+        hh24 = str(12)
+    else:
+        hh24 = str(hh + 12) 
+        # print(hh24)
     sunset24 = hh24 + ":" + hour.split(':')[1] + ":" + hour.split(':')[2]
-    print("line 73-", sunset24)
+    print(sunset24)
 
-elif sunseteutc.split()[1] == "AM":
-    sunset = sunsetutc.split()[0]
-    print("line 77-", sunset24)
+elif sunsetutc.split()[1] == "AM":
+    hour = sunsetutc.split()[0]
+    hh = int(hour.split(":")[0])
+    if hh == 12:
+        hh24 = "00"
+        sunset24 = hh24 + ":" + hour.split(':')[1] + ":" + hour.split(':')[2]
+    else:
+        sunset24 = sunsetutc.split()[0]
+    print(sunset24)
 
 url = "https://timeapi.io/api/Conversion/ConvertTimeZone"
 payload = json.dumps({

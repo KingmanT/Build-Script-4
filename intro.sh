@@ -1,8 +1,10 @@
 #!/bin/bash
 #
+# This script was created by Kingman Tam for Build Script 4.  Script started on 9/12/22. 
 # This script will be used to gather information from the user about what time zone they want information on
 # and then use that input to get the sunrise/sunset information on that time zone.
 
+echo " "
 echo "Welcome to the sunrise/sunset calculator"
 echo "------------------------------------------"
 echo "Please note that this program requires a Google Maps API key in order to work." 
