@@ -1,5 +1,12 @@
 #!/usr/bin/python3
 
+# This script was created by Kingman Tam for Build Script 4.  Script started on 9/12/22.  
+# This script is to be used in conjunction with BASH script to use API's 
+#
+#
+# ISSUES: This script will break if user enters a location where the sun will rise/set at 12:00PM to 12:59PM.  Conversion to 24 format was done 
+# manually and 2400 hours to 2459 hours does not exist. Will add rule for this bug at later time.  
+
 import json
 import sys
 import requests
@@ -9,8 +16,8 @@ latlong = requests.get('https://maps.googleapis.com/maps/api/geocode/json?addres
 # print(latlong.json())
 latitude = latlong.json()['results'][0]['geometry']['location']['lat']
 longitude = latlong.json()['results'][0]['geometry']['location']['lng']
-print("line 12-", latitude)
-print("line 13-", longitude)
+print("line 19-", latitude)
+print("line 20-", longitude)
 
 # print(sys.argv)
 # print(sys.arg[1])
@@ -20,31 +27,31 @@ suninfo = requests.get('https://api.sunrise-sunset.org/json?lat=' + str(latitude
 # print(suninfo.json())
 sunriseutc = suninfo.json()['results']['sunrise']
 sunsetutc = suninfo.json()['results']['sunset']
-print("line 23-", sunriseutc)
-print("line 24-", sunsetutc)
+print("line 30-", sunriseutc)
+print("line 31-", sunsetutc)
 
 # timezone = requests.get('https://timeapi.io/api/TimeZone/coordinate?latitude=38.9&longitude=-77.03')
 timeinfo = requests.get('https://timeapi.io/api/TimeZone/coordinate?latitude=' + str(latitude) + '&longitude=' + str(longitude))
 timezone = timeinfo.json()['timeZone']
-print("line 29-", timezone)
+print("line 36-", timezone)
 
 if sunriseutc.split()[1] == "PM":
     hour = sunriseutc.split()[0]
     # print(hour)
     hh = int(hour.split(':')[0])
-    hhh = str(hh + 12) 
-    # print(hhh)
-    sunrise = hhh + ":" + hour.split(':')[1] + ":" + hour.split(':')[2]
-    print("line 38-", sunrise)
+    hh24 = str(hh + 12) 
+    # print(hh24)
+    sunrise24 = hh24 + ":" + hour.split(':')[1] + ":" + hour.split(':')[2]
+    print("line 45-", sunrise24)
 
 elif sunriseutc.split()[1] == "AM":
-    sunrise = sunriseutc.split()[0]
-    print("line 42-", sunrise)
+    sunrise24 = sunriseutc.split()[0]
+    print("line 49-", sunrise24)
 
 url = "https://timeapi.io/api/Conversion/ConvertTimeZone"
 payload = json.dumps({
   "fromTimeZone": "UTC",
-  "dateTime": "2021-03-14 " f'{sunrise}',
+  "dateTime": "2021-03-14 " f'{sunrise24}',
   "toTimeZone": f'{timezone}',
   "dstAmbiguity": ""
 })
@@ -60,19 +67,19 @@ if sunsetutc.split()[1] == "PM":
     hour = sunsetutc.split()[0]
     # print(hour)
     hh = int(hour.split(':')[0])
-    hhh = str(hh + 12) 
-    # print(hhh)
-    sunset = hhh + ":" + hour.split(':')[1] + ":" + hour.split(':')[2]
-    print("line 66-", sunset)
+    hh24 = str(hh + 12) 
+    # print(hh24)
+    sunset24 = hh24 + ":" + hour.split(':')[1] + ":" + hour.split(':')[2]
+    print("line 73-", sunset24)
 
 elif sunseteutc.split()[1] == "AM":
     sunset = sunsetutc.split()[0]
-    print("line 70-", sunset)
+    print("line 77-", sunset24)
 
 url = "https://timeapi.io/api/Conversion/ConvertTimeZone"
 payload = json.dumps({
   "fromTimeZone": "UTC",
-  "dateTime": "2021-03-14 " f'{sunset}',
+  "dateTime": "2021-03-14 " f'{sunset24}',
   "toTimeZone": f'{timezone}',
   "dstAmbiguity": ""
 })
