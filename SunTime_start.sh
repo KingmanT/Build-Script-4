@@ -1,8 +1,15 @@
 #!/bin/bash
+
+##############################################################################################################################
+# Created by Kingman Tam for Build Script 4.  Script started on 9/12/22.
 #
-# This script was created by Kingman Tam for Build Script 4.  Script started on 9/12/22. 
-# This script will be used to gather information from the user about what time zone they want information on
-# and then use that input to get the sunrise/sunset information on that time zone.
+# This script is to be used in conjunction and CONTINUED in BASH script titled "SunTime_continued.sh" to use API's to gather information. 
+# This script will be used to gather information from the user about which location they want sunrise/sunset information on
+# and pass those inputs to the PYTHON script: "SunTime_continued.py"
+#
+# Please read README.md for full notes on script.
+#
+###############################################################################################################################
 
 echo " "
 echo "Welcome to the sunrise/sunset calculator"
@@ -29,5 +36,5 @@ echo "Please enter the date that you would like to get information on"
 echo "------------------------------------------"
 read inputdate
 
-python3 build_script_4v1.py "$inputlocation" "$inputdate" "$key"
+python3 SunTime_continued.py "$inputlocation" "$inputdate" "$key"
 
